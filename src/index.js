@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 
 const App = ()=> {
   return (
-    <h1>FullStack Template</h1>
+    <h1>Movies</h1>
   );
 };
 
