@@ -16,6 +16,10 @@ app.get('/dist/main.js.map', (req, res)=> res.sendFile(reactSourceMap));
 const styleSheet = path.join(__dirname, 'styles.css');
 app.get('/styles.css', (req, res)=> res.sendFile(styleSheet));
 
+app.get('/api/movies', (req, res, next_)=> {
+  res.send([]);
+});
+
 const init = async()=> {
   await client.connect();
   console.log('connected to database');
@@ -24,12 +28,12 @@ const init = async()=> {
     CREATE TABLE movies(
       id SERIAL PRIMARY KEY,
       title VARCHAR(255),
-      stars INT
+      stars INTEGER
     );
     INSERT INTO movies (title, stars) VALUES ('Inception', 5);
     INSERT INTO movies (title, stars) VALUES ('The Shawshank Redemption', 5);
     INSERT INTO movies (title, stars) VALUES ('The Dark Knight', 5);
-    INSERT INTO movies (title, stars) VALUES ('Forrest Gump', 4):
+    INSERT INTO movies (title, stars) VALUES ('Forrest Gump', 4);
     INSERT INTO movies (title, stars) VALUES ('Pulp Fiction', 4);
     INSERT INTO movies (title, stars) VALUES ('The Lord of the Rings: The Return of the King', 5);
     INSERT INTO movies (title, stars) VALUES ('The Godfather', 5);
@@ -38,6 +42,7 @@ const init = async()=> {
     INSERT INTO movies (title, stars) VALUES ('Titanic', 4);
   `;
   await client.query(SQL);
+
   console.log('create your tables and seed data');
 
   const port = process.env.PORT || 3000;
