@@ -16,8 +16,17 @@ app.get('/dist/main.js.map', (req, res)=> res.sendFile(reactSourceMap));
 const styleSheet = path.join(__dirname, 'styles.css');
 app.get('/styles.css', (req, res)=> res.sendFile(styleSheet));
 
-app.get('/api/movies', (req, res, next_)=> {
-  res.send([]);
+app.get('/api/movies', async(req, res, next)=> {
+  try {
+    const SQL = `
+      SELECT *
+      FROM movies    
+    `;
+    const response = await client.query(SQL);
+    res.send(response.rows);
+  } catch (error) {
+    next(error);    
+  }
 });
 
 const init = async()=> {

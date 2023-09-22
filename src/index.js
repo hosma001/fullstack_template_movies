@@ -7,12 +7,25 @@ const App = ()=> {
   useEffect(()=> {
     const fetchMovies = async()=> {
       const response = await axios.get('/api/movies');
-      console.log('response');
+      setMovies(response.data);
     };
     fetchMovies();
   }, []);
   return (
-    <h1>Movies ({ movies.length })</h1>
+    <div>
+      <h1>Movies ({ movies.length })</h1>
+      <ul>
+        {
+          movies.map( movie => {
+            return (
+              <li key={ movie.id }>
+                { movie.title }
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
   );
 };
 
