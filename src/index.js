@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import axios from 'axios';
+import AddMovieForm from './AddMovieForm';
 
 const App = ()=> {
   const [movies, setMovies] = useState([]);
@@ -64,6 +65,7 @@ const increaseRating = async(movie)=> {
     <div>
       <h1>Movies ({ movies.length })</h1>
       <p>{ error ? error : '' }</p>
+      <AddMovieForm movies={ movies } setMovies={ setMovies } />
       <ul>
         {
           movies.map( movie => {
